@@ -753,14 +753,9 @@ p {
 }
 
 .assistant-shell {
-  max-width: 1000px;
-
   margin-inline: auto;
-
   background: var(--color-charcoal);
-
-  border:
-    1px solid var(--color-border);
+  border: 1px solid var(--color-border);
 }
 
 
@@ -768,17 +763,12 @@ p {
 
 .assistant-shell-header {
   min-height: 100px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: 30px;
-
   padding: 24px 30px;
-
-  border-bottom:
-    1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .assistant-identity {
@@ -1002,14 +992,10 @@ p {
 
 .message-label {
   margin-bottom: 8px;
-
   color: var(--color-gold);
-
   font-size: 0.62rem;
   font-weight: 600;
-
   letter-spacing: 0.12em;
-
   text-transform: uppercase;
 }
 
@@ -1020,25 +1006,17 @@ p {
 
 .message-content {
   padding: 17px 20px;
-
   background: var(--color-surface);
-
-  border:
-    1px solid var(--color-border);
-
+  border: 1px solid var(--color-border);
   color: var(--color-text);
-
   font-size: 0.88rem;
-
   line-height: 1.75;
 }
 
 .chat-message-user
 .message-content {
   background: var(--color-gold);
-
   border-color: var(--color-gold);
-
   color: var(--color-black);
 }
 
@@ -1072,28 +1050,19 @@ p {
 
 .assistant-thinking {
   min-width: 70px;
-
   display: flex;
   align-items: center;
-
   gap: 5px;
-
   padding: 18px 20px;
-
   background: var(--color-surface);
-
-  border:
-    1px solid var(--color-border);
+  border: 1px solid var(--color-border);
 }
 
 .assistant-thinking span {
   width: 5px;
   height: 5px;
-
   background: var(--color-gold);
-
   border-radius: 50%;
-
   animation:
     assistant-thinking 1.2s infinite ease-in-out;
 }
@@ -1112,13 +1081,11 @@ p {
   60%,
   100% {
     opacity: 0.3;
-
     transform: translateY(0);
   }
 
   30% {
     opacity: 1;
-
     transform: translateY(-4px);
   }
 
@@ -1131,9 +1098,7 @@ p {
 
 .assistant-input-area {
   padding: 25px 30px 20px;
-
-  border-top:
-    1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
 }
 
 .assistant-chat-form {
@@ -1892,7 +1857,7 @@ p {
   .assistant-input-area {
     padding: 20px;
   }
-  
+
 }
 
 

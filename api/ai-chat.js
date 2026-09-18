@@ -1,5 +1,9 @@
 export default async function handler(request, response) {
 
+  // --------------------------------
+  // Allow POST requests only
+  // --------------------------------
+
   if (request.method !== "POST") {
     return response.status(405).json({
       success: false,
@@ -11,32 +15,30 @@ export default async function handler(request, response) {
 
     const { messages, products } = request.body;
 
-    // -----------------------------
-    // Validate request
-    // -----------------------------
+    // --------------------------------
+    // Validate conversation
+    // --------------------------------
 
-    if (!messages || !Array.isArray(messages)) {
+    if (
+      !messages ||
+      !Array.isArray(messages) ||
+      messages.length === 0
+    ) {
       return response.status(400).json({
         success: false,
         message: "Conversation messages are required"
       });
     }
 
-    if (messages.length === 0) {
-      return response.status(400).json({
-        success: false,
-        message: "Conversation cannot be empty"
-      });
-    }
-
-    // -----------------------------
+    // --------------------------------
     // Gemini API Key
-    // -----------------------------
+    // --------------------------------
 
     const apiKey =
       process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
+
       console.error(
         "GEMINI_API_KEY is not configured"
       );
@@ -47,14 +49,15 @@ export default async function handler(request, response) {
       });
     }
 
-    // -----------------------------
+    // --------------------------------
     // Winova Product Catalogue
-    // -----------------------------
+    // --------------------------------
 
     const productCatalogue =
       Array.isArray(products)
         ? products
             .map((product) => {
+
               return `
 Name: ${product.name}
 Category: ${product.category}
@@ -64,108 +67,156 @@ Volume: ${product.volume}
 Alcohol: ${product.alcohol}
 Description: ${product.description}
 `;
+
             })
             .join("\n")
         : "No product catalogue provided.";
 
-    // -----------------------------
-    // System Instructions
-    // -----------------------------
+    // --------------------------------
+    // Winova Assistant Instructions
+    // --------------------------------
 
     const systemInstruction = `
 You are the Winova Wine Assistant, the AI assistant for Winova, an online wine store.
 
-Your job is to help customers with:
+YOUR ROLE
 
-1. Questions about Winova wines.
-2. Wine recommendations.
-3. Food and wine pairing.
-4. Wine varieties and terminology.
-5. Wine regions and origins.
-6. Wine serving and storage.
-7. General wine education.
-8. Winova delivery and checkout questions.
+Help customers with:
 
-WINOVA STORE INFORMATION:
+- Winova wines and products
+- Wine recommendations
+- Food and wine pairing
+- Wine varieties
+- Wine terminology
+- Wine regions and origins
+- Wine serving
+- Wine storage
+- Wine education
+- Winova delivery
+- Winova checkout and payment questions
+
+WINOVA STORE INFORMATION
 
 Standard Delivery: ₦2,500.
 Express Delivery: ₦5,000.
+
 Payments are processed securely through Paystack.
 
-WINOVA PRODUCT CATALOGUE:
+WINOVA PRODUCT CATALOGUE
 
 ${productCatalogue}
 
-IMPORTANT RULES:
+IMPORTANT PRODUCT RULES
 
-- When discussing products sold by Winova, use only products in the catalogue above.
+When answering questions specifically about Winova:
+
+- Use only products contained in the Winova catalogue above.
 - Never invent a Winova product.
 - Never invent a product price.
-- Never claim Winova sells something that is not in the catalogue.
-- You may answer general wine questions using your broader wine knowledge.
-- Clearly distinguish general wine advice from products actually available at Winova.
-- When recommending a Winova wine, consider the customer's budget and preferences when provided.
-- Prices should be displayed in Nigerian Naira using ₦.
-- Keep responses helpful, conversational and reasonably concise.
-- If the user asks something unrelated to wine or Winova, politely explain that you specialise in wine and the Winova store.
+- Never claim that Winova sells a product that is not listed.
+- Never change the price of a listed product.
+- Use Nigerian Naira (₦) when displaying prices.
+- If a customer asks for something Winova does not currently sell, say that it is not currently listed in the catalogue.
+
+GENERAL WINE QUESTIONS
+
+You may use your general wine knowledge to answer questions about:
+
+- Wine types
+- Grape varieties
+- Food pairing
+- Wine regions
+- Serving temperature
+- Storage
+- Wine terminology
+- Choosing wine
+- General wine education
+
+Clearly distinguish between general wine advice and products actually sold by Winova.
+
+RECOMMENDATIONS
+
+When recommending products:
+
+- Consider the customer's stated budget.
+- Consider their preferred wine type when provided.
+- Consider food pairing when relevant.
+- Recommend only Winova products when the user specifically asks what they can buy from Winova.
+- Explain briefly why a recommendation may suit them.
+
+CONVERSATION STYLE
+
+- Be friendly and conversational.
+- Keep answers reasonably concise.
+- Use simple language where possible.
+- You are a wine-store assistant, not a general-purpose assistant.
+
+If the user asks something completely unrelated to wine or Winova, politely explain that you specialise in wine and the Winova store.
 `;
 
-    // -----------------------------
-    // Convert conversation to
-    // Gemini format
-    // -----------------------------
+    // --------------------------------
+    // Convert our conversation into
+    // readable conversation context
+    // --------------------------------
 
-    const contents = messages.map((message) => ({
-      role:
-        message.role === "assistant"
-          ? "model"
-          : "user",
+    const conversation = messages
+      .map((message) => {
 
-      parts: [
-        {
-          text: message.content
-        }
-      ]
-    }));
+        const speaker =
+          message.role === "assistant"
+            ? "Winova Assistant"
+            : "Customer";
 
-    // -----------------------------
-    // Send request to Gemini
-    // -----------------------------
+        return `${speaker}: ${message.content}`;
+
+      })
+      .join("\n\n");
+
+    // --------------------------------
+    // Gemini Interactions API
+    // --------------------------------
 
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
         method: "POST",
 
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
         },
 
         body: JSON.stringify({
-          system_instruction: {
-            parts: [
-              {
-                text: systemInstruction
-              }
-            ]
-          },
+          model: "gemini-3.6-flash",
 
-          contents,
+          system_instruction:
+            systemInstruction,
 
-          generationConfig: {
-            temperature: 0.5,
-            maxOutputTokens: 500
+          input: `
+Below is the conversation so far.
+
+Continue the conversation by responding to the customer's latest message.
+
+${conversation}
+`,
+
+          generation_config: {
+            temperature: 0.5
           }
         })
       }
     );
 
+    // --------------------------------
+    // Read Gemini response
+    // --------------------------------
+
     const geminiData =
       await geminiResponse.json();
 
-    // -----------------------------
+    // --------------------------------
     // Handle Gemini errors
-    // -----------------------------
+    // --------------------------------
 
     if (!geminiResponse.ok) {
 
@@ -174,28 +225,51 @@ IMPORTANT RULES:
         geminiData
       );
 
-      return response.status(500).json({
+      return response.status(
+        geminiResponse.status
+      ).json({
         success: false,
+
         message:
           geminiData?.error?.message ||
           "Unable to generate AI response"
       });
     }
 
-    // -----------------------------
-    // Extract AI response
-    // -----------------------------
+    // --------------------------------
+    // Extract text from Interactions
+    // API response
+    // --------------------------------
 
     const assistantResponse =
-      geminiData?.candidates?.[0]
-        ?.content?.parts
-        ?.map((part) => part.text)
-        .join("");
+      geminiData?.steps
+        ?.filter(
+          (step) =>
+            step.type === "model_output"
+        )
+        ?.flatMap(
+          (step) =>
+            step.content || []
+        )
+        ?.filter(
+          (content) =>
+            content.type === "text"
+        )
+        ?.map(
+          (content) =>
+            content.text
+        )
+        ?.join("\n")
+        ?.trim();
+
+    // --------------------------------
+    // Ensure Gemini returned text
+    // --------------------------------
 
     if (!assistantResponse) {
 
       console.error(
-        "No Gemini response:",
+        "Gemini returned no text:",
         geminiData
       );
 
@@ -206,9 +280,9 @@ IMPORTANT RULES:
       });
     }
 
-    // -----------------------------
-    // Return response to React
-    // -----------------------------
+    // --------------------------------
+    // Send AI response to React
+    // --------------------------------
 
     return response.status(200).json({
       success: true,
@@ -224,6 +298,7 @@ IMPORTANT RULES:
 
     return response.status(500).json({
       success: false,
+
       message:
         "Something went wrong while contacting the AI assistant"
     });

@@ -2,45 +2,47 @@ import { useState } from "react";
 
 function ChatInput({
   onSendMessage,
-  isLoading
+  disabled
 }) {
   const [input, setInput] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const message = input.trim();
+    if (!input.trim() || disabled) return;
 
-    if (!message) {
-      return;
-    }
-
-    onSendMessage(message);
+    onSendMessage(input);
 
     setInput("");
   };
 
   return (
     <form
-      className="chat-input"
+      className="assistant-chat-form"
       onSubmit={handleSubmit}
     >
 
       <input
         type="text"
-        placeholder="Ask Waini about wine..."
         value={input}
         onChange={(event) =>
           setInput(event.target.value)
         }
+        placeholder="Ask Waini about wine..."
+        disabled={disabled}
+        aria-label="Ask Waini Assistant"
       />
 
-        <button
-            type="submit"
-            disabled={isLoading}
-        >
-            {isLoading ? "Thinking..." : "Send"}
-        </button>
+      <button
+        type="submit"
+        disabled={
+          disabled || !input.trim()
+        }
+        aria-label="Send message"
+      >
+        <span>Send</span>
+        <span className="send-arrow">↗</span>
+      </button>
 
     </form>
   );

@@ -7,27 +7,37 @@ const questions = [
   "How does delivery work at Waini?"
 ];
 
-function SuggestedQuestions({ onQuestionClick }) {
+function SuggestedQuestions({
+  onQuestionClick,
+  disabled
+}) {
   return (
     <div className="suggested-questions">
 
-      <p>Try asking:</p>
+      {questions.map((question, index) => (
 
-      <div className="suggested-questions-grid">
+        <button
+          key={index}
+          className="suggested-question"
+          onClick={() =>
+            onQuestionClick(question)
+          }
+          disabled={disabled}
+        >
+          <span className="suggested-number">
+            0{index + 1}
+          </span>
 
-        {questions.map((question) => (
-          <button
-            key={question}
-            type="button"
-            onClick={() =>
-              onQuestionClick(question)
-            }
-          >
+          <span>
             {question}
-          </button>
-        ))}
+          </span>
 
-      </div>
+          <span className="suggested-arrow">
+            ↗
+          </span>
+        </button>
+
+      ))}
 
     </div>
   );

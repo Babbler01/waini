@@ -31,8 +31,16 @@ function Checkout() {
   // Shipping
   // --------------------------------
 
-  const [shippingMethod, setShippingMethod] =
-    useState("standard");
+    const [shippingMethod, setShippingMethod] =
+      useState("standard");
+
+    const [isVerifying, setIsVerifying] =
+      useState(false);
+
+    const [paymentError, setPaymentError] =
+      useState("");
+
+  
 
   // --------------------------------
   // Handle Customer Form Changes
@@ -91,6 +99,9 @@ function Checkout() {
   // --------------------------------
 
   const handlePaystackSuccess = async (reference) => {
+    setIsVerifying(true);
+    setPaymentError("");
+
     try {
       console.log(
         "Paystack payment completed:",
@@ -113,21 +124,42 @@ function Checkout() {
         }
       );
 
-      const verification =
-        await response.json();
+      // Read the response as text first
+      const responseText = await response.text();
+
+      console.log(
+        "Verification response status:",
+        response.status
+      );
+
+      console.log(
+        "Verification response:",
+        responseText
+      );
+
+      // Make sure the server actually returned something
+      if (!responseText) {
+        throw new Error(
+          "The payment verification server returned an empty response."
+        );
+      }
+
+      // Now attempt to convert it to JSON
+      let verification;
+
+      try {
+        verification = JSON.parse(responseText);
+      } catch {
+        throw new Error(
+          "The payment verification server returned an invalid response."
+        );
+      }
 
       if (!response.ok || !verification.success) {
-        console.error(
-          "Verification failed:",
-          verification
-        );
-
-        alert(
+        throw new Error(
           verification.message ||
           "Unable to verify payment."
         );
-
-        return;
       }
 
       console.log(
@@ -177,13 +209,17 @@ function Checkout() {
 
     } catch (error) {
       console.error(
-        "Verification request failed:",
+        "Payment verification failed:",
         error
       );
 
-      alert(
-        "Your payment was received, but we could not verify it. Please do not make another payment yet."
+      setPaymentError(
+        error.message ||
+        "We couldn't verify your payment. Please do not make another payment yet."
       );
+
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -423,23 +459,55 @@ function Checkout() {
             <h2>Payment</h2>
 
             <p>
-              Complete your order securely
-              using Paystack.
+              Complete your order securely using Paystack.
             </p>
 
-            <PaystackButton
-              {...paystackConfig}
-              className="paystack-button"
-              disabled={
-                !customerInformationComplete
-              }
-            />
+            {isVerifying ? (
+              <div className="payment-verifying">
 
-            {!customerInformationComplete && (
-              <p className="payment-message">
-                Complete your customer
-                information to continue.
-              </p>
+                <div className="payment-spinner"></div>
+
+                <div>
+                  <strong>
+                    Verifying Payment...
+                  </strong>
+
+                  <p>
+                    Please wait while we confirm your
+                    payment. Do not close this page.
+                  </p>
+                </div>
+
+              </div>
+            ) : (
+              <PaystackButton
+                {...paystackConfig}
+                className="paystack-button"
+                disabled={
+                  !customerInformationComplete ||
+                  isVerifying
+                }
+              />
+            )}
+
+            {!customerInformationComplete &&
+              !isVerifying && (
+                <p className="payment-message">
+                  Complete your customer information
+                  to continue.
+                </p>
+              )}
+
+            {paymentError && (
+              <div className="payment-error">
+
+                <strong>
+                  Payment verification issue
+                </strong>
+
+                <p>{paymentError}</p>
+
+              </div>
             )}
 
           </div>

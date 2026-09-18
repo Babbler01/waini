@@ -1,10 +1,10 @@
 const questions = [
   "What wines do you recommend for a beginner?",
-  "What red wines are available at Winova?",
+  "What red wines are available at Waini?",
   "What wines can I buy for under ₦20,000?",
   "What wine pairs well with steak?",
   "What is the difference between red and white wine?",
-  "How does delivery work at Winova?"
+  "How does delivery work at Waini?"
 ];
 
 function SuggestedQuestions({ onQuestionClick }) {

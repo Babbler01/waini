@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Confirmation() {
   const savedOrder =
     sessionStorage.getItem(
-      "winova-last-order"
+      "waini-last-order"
     );
 
   const order = savedOrder

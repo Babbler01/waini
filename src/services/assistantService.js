@@ -23,7 +23,7 @@ export async function sendMessageToAssistant(
   if (!response.ok || !data.success) {
     throw new Error(
       data.message ||
-      "Unable to contact Winova Assistant"
+      "Unable to contact Waini Assistant"
     );
   }
 

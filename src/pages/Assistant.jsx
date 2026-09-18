@@ -15,7 +15,7 @@ function Assistant() {
     {
       role: "assistant",
       content:
-        "Hi! I'm the Winova Wine Assistant. Ask me about our wines, recommendations, food pairings, delivery, or wine in general."
+        "Hi! I'm the Waini Wine Assistant. Ask me about our wines, recommendations, food pairings, delivery, or wine in general."
     }
   ]);
 
@@ -86,7 +86,7 @@ function Assistant() {
 
       <div className="assistant-header">
 
-        <p>WINOVA ASSISTANT</p>
+        <p>WAINI ASSISTANT</p>
 
         <h1>Your Personal Wine Guide</h1>
 

@@ -15,7 +15,7 @@ function ChatMessages({
           <div className="message-label">
             {message.role === "user"
               ? "You"
-              : "Winova Assistant"}
+              : "Waini Assistant"}
           </div>
 
           <div className="message-content">
@@ -29,7 +29,7 @@ function ChatMessages({
             <div className="chat-message assistant">
 
                 <div className="message-label">
-                Winova Assistant
+                Waini Assistant
                 </div>
 
                 <div className="message-content">

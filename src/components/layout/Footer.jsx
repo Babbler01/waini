@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer>
-      <p>&copy; 2026 Winova Brews. All rights reserved.</p>
+      <p>&copy; 2026 Waini Brews. All rights reserved.</p>
     </footer>
   );
 }

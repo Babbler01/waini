@@ -9,7 +9,7 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("winova-cart");
+    const savedCart = localStorage.getItem("waini-cart");
 
     return savedCart
       ? JSON.parse(savedCart)
@@ -18,7 +18,7 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem(
-      "winova-cart",
+      "waini-cart",
       JSON.stringify(cart)
     );
   }, [cart]);

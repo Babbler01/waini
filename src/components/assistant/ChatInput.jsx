@@ -28,7 +28,7 @@ function ChatInput({
 
       <input
         type="text"
-        placeholder="Ask Winova about wine..."
+        placeholder="Ask Waini about wine..."
         value={input}
         onChange={(event) =>
           setInput(event.target.value)

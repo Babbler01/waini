@@ -8,7 +8,7 @@ function Header() {
   return (
     <header>
       <Link to="/">
-        <h2>Winova</h2>
+        <h2>Waini</h2>
       </Link>
 
       <nav>

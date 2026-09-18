@@ -199,7 +199,7 @@ function Checkout() {
       };
 
       sessionStorage.setItem(
-        "winova-last-order",
+        "waini-last-order",
         JSON.stringify(order)
       );
 

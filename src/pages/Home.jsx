@@ -50,7 +50,7 @@ function Home() {
             <div className="hero-image-frame">
 
               <img
-                src="/public/images/site/hero.jpg"
+                src="/images/site/hero.jpg"
                 alt="Premium wine from Waini"
               />
 

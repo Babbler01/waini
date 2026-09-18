@@ -50,17 +50,68 @@ export function CartProvider({ children }) {
     });
   };
 
+  const increaseQuantity = (productId) => {
+    setCart((currentCart) =>
+      currentCart.map((item) =>
+        item.id === productId
+          ? {
+              ...item,
+              quantity: item.quantity + 1
+            }
+          : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (productId) => {
+    setCart((currentCart) =>
+      currentCart.map((item) =>
+        item.id === productId && item.quantity > 1
+          ? {
+              ...item,
+              quantity: item.quantity - 1
+            }
+          : item
+      )
+    );
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((currentCart) =>
+      currentCart.filter(
+        (item) => item.id !== productId
+      )
+    );
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const cartCount = cart.reduce(
     (total, item) => total + item.quantity,
     0
   );
+
+  const cartSubtotal = cart.reduce(
+    (total, item) =>
+      total + item.price * item.quantity,
+    0
+  );
+
+  
 
   return (
     <CartContext.Provider
       value={{
         cart,
         addToCart,
-        cartCount
+        increaseQuantity,
+        decreaseQuantity,
+        removeFromCart,
+        clearCart,
+        cartCount,
+        cartSubtotal
       }}
     >
       {children}

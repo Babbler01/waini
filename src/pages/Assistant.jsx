@@ -65,9 +65,8 @@ function Assistant() {
         );
 
         const errorMessage = {
-        role: "assistant",
-        content:
-            "Sorry, I couldn't answer that right now. Please try again."
+            role: "assistant",
+            content: `AI Error: ${error.message}`
         };
 
         setMessages((currentMessages) => [

@@ -2,7 +2,7 @@ import { useState } from "react";
 import SuggestedQuestions from "../components/assistant/SuggestedQuestions";
 import ChatMessages from "../components/assistant/ChatMessages";
 import ChatInput from "../components/assistant/ChatInput";
-import { wines } from "../data/products";
+import wines from "../data/products";
 import { sendMessageToAssistant } from "../services/assistantService";
 
 function Assistant() {

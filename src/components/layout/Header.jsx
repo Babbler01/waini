@@ -15,6 +15,7 @@ function Header() {
         <Link to="/">Home</Link>
         <Link to="/products">Products</Link>
         <Link to="/about">About</Link>
+        <Link to="/assistant">FAQ</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/cart">
           Cart ({cartCount})

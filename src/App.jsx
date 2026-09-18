@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
+import Assistant from "./pages/Assistant";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/assistant" element={<Assistant />} />
       </Routes>
     </Layout>
   );

@@ -1,10 +1,8 @@
 const questions = [
-  "What wines do you recommend for a beginner?",
-  "What red wines are available at Waini?",
-  "What wines can I buy for under ₦20,000?",
+  "Recommend a wine for a beginner",
+  "Show me wines under ₦20,000",
   "What wine pairs well with steak?",
-  "What is the difference between red and white wine?",
-  "How does delivery work at Waini?"
+  "How does delivery work?"
 ];
 
 function SuggestedQuestions({
@@ -12,31 +10,21 @@ function SuggestedQuestions({
   disabled
 }) {
   return (
-    <div className="suggested-questions">
+    <div className="sidebar-questions">
 
       {questions.map((question, index) => (
-
         <button
           key={index}
-          className="suggested-question"
-          onClick={() =>
-            onQuestionClick(question)
-          }
+          onClick={() => onQuestionClick(question)}
           disabled={disabled}
+          className="sidebar-question"
         >
-          <span className="suggested-number">
-            0{index + 1}
-          </span>
+          <span>{question}</span>
 
-          <span>
-            {question}
-          </span>
-
-          <span className="suggested-arrow">
-            ↗
+          <span className="question-arrow">
+            →
           </span>
         </button>
-
       ))}
 
     </div>

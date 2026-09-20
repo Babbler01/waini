@@ -10,7 +10,7 @@ function Assistant() {
     {
       role: "assistant",
       content:
-        "Welcome to Waini. I'm your personal wine assistant. I can help you discover wines, explore pairings, understand wine varieties, or find something from our collection."
+        "Welcome to Waini. I'm your personal wine assistant. Ask me about our wines, food pairings, wine varieties, delivery, or finding the right bottle for your budget."
     }
   ]);
 
@@ -33,11 +33,10 @@ function Assistant() {
     setIsLoading(true);
 
     try {
-      const response =
-        await sendMessageToAssistant(
-          updatedMessages,
-          wines
-        );
+      const response = await sendMessageToAssistant(
+        updatedMessages,
+        wines
+      );
 
       setMessages([
         ...updatedMessages,
@@ -47,10 +46,7 @@ function Assistant() {
         }
       ]);
     } catch (error) {
-      console.error(
-        "Waini Assistant Error:",
-        error
-      );
+      console.error("Waini Assistant Error:", error);
 
       setMessages([
         ...updatedMessages,
@@ -66,123 +62,105 @@ function Assistant() {
   };
 
   return (
-    <main className="assistant-page">
+    <main className="wine-assistant-page">
 
-      <section className="assistant-intro">
+      <div className="assistant-workspace">
 
-        <div className="container assistant-intro-container">
+        {/* LEFT PANEL */}
 
-          <div className="assistant-intro-content">
+        <aside className="assistant-sidebar">
+
+          <div className="assistant-sidebar-top">
+
+            <div className="assistant-symbol">
+              W
+            </div>
 
             <p className="section-label">
-              Waini Wine Assistant
+              Your Digital Sommelier
             </p>
 
             <h1>
-              Your Personal
-              <span> Wine Guide.</span>
+              A better way to
+              <span> discover wine.</span>
             </h1>
 
-            <p>
-              Discover wines, explore food pairings,
-              learn about varieties and find the
-              perfect bottle from the Waini collection.
+            <p className="assistant-sidebar-description">
+              Ask Waini about our collection, food
+              pairings, wine styles, budgets and
+              choosing the right bottle for any
+              occasion.
             </p>
 
           </div>
 
-          <div className="assistant-intro-mark">
-            <span>W</span>
-          </div>
 
-        </div>
+          <div className="assistant-sidebar-suggestions">
 
-      </section>
+            <p className="assistant-try-label">
+              Try one
+            </p>
 
-
-      <section className="assistant-experience">
-
-        <div className="container">
-
-          <div className="assistant-shell">
-
-            <div className="assistant-shell-header">
-
-              <div className="assistant-identity">
-
-                <div className="assistant-avatar">
-                  W
-                </div>
-
-                <div>
-                  <h2>Waini Assistant</h2>
-
-                  <p>
-                    <span className="assistant-status-dot"></span>
-                    Your digital wine guide
-                  </p>
-                </div>
-
-              </div>
-
-              <span className="assistant-ai-label">
-                AI Powered
-              </span>
-
-            </div>
-
-
-            <div className="assistant-suggestions-area">
-
-              <div className="assistant-suggestions-heading">
-
-                <span>
-                  Not sure where to begin?
-                </span>
-
-                <p>
-                  Try one of these questions
-                </p>
-
-              </div>
-
-              <SuggestedQuestions
-                onQuestionClick={handleSendMessage}
-                disabled={isLoading}
-              />
-
-            </div>
-
-
-            <div className="assistant-conversation">
-
-              <ChatMessages
-                messages={messages}
-                isLoading={isLoading}
-              />
-
-            </div>
-
-
-            <div className="assistant-input-area">
-
-              <ChatInput
-                onSendMessage={handleSendMessage}
-                disabled={isLoading}
-              />
-
-              <p className="assistant-disclaimer">
-                Waini Assistant can make mistakes.
-                Please verify important information.
-              </p>
-
-            </div>
+            <SuggestedQuestions
+              onQuestionClick={handleSendMessage}
+              disabled={isLoading}
+            />
 
           </div>
 
-        </div>
+        </aside>
 
-      </section>
+
+        {/* CHAT AREA */}
+
+        <section className="assistant-chat-panel">
+
+          <header className="assistant-panel-header">
+
+            <div className="assistant-panel-title">
+
+              <span className="assistant-online-dot"></span>
+
+              <strong>
+                Waini Assistant
+              </strong>
+
+            </div>
+
+            <span className="assistant-panel-meta">
+              AI Wine Guide
+            </span>
+
+          </header>
+
+
+          <div className="assistant-chat-body">
+
+            <ChatMessages
+              messages={messages}
+              isLoading={isLoading}
+            />
+
+          </div>
+
+
+          <div className="assistant-composer">
+
+            <ChatInput
+              onSendMessage={handleSendMessage}
+              disabled={isLoading}
+            />
+
+            <p>
+              Waini Assistant can make mistakes.
+              Please verify important information.
+            </p>
+
+          </div>
+
+        </section>
+
+      </div>
 
     </main>
   );

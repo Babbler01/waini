@@ -4,6 +4,7 @@ import ChatMessages from "../components/assistant/ChatMessages";
 import ChatInput from "../components/assistant/ChatInput";
 import wines from "../data/products";
 import { sendMessageToAssistant } from "../services/assistantService";
+import "../styles/assistant.css";
 
 function Assistant() {
   const [messages, setMessages] = useState([

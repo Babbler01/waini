@@ -72,17 +72,14 @@ function Assistant() {
 
           <div className="assistant-sidebar-top">
 
-            <div className="assistant-symbol">
-              W
-            </div>
 
             <p className="section-label">
               Your Digital Sommelier
             </p>
 
             <h1>
-              A better way to
-              <span> discover wine.</span>
+              Discover
+              <span>wine.</span>
             </h1>
 
             <p className="assistant-sidebar-description">

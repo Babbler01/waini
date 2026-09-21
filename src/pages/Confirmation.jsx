@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../styles/confirmation.css";
 
 function Confirmation() {
   const savedOrder =
@@ -10,162 +11,418 @@ function Confirmation() {
     ? JSON.parse(savedOrder)
     : null;
 
+
+  // ========================================
+  // NO ORDER
+  // ========================================
+
   if (!order) {
     return (
-      <section className="confirmation-page">
+      <main className="confirmation-page">
 
-        <h1>No Order Found</h1>
+        <section className="confirmation-empty">
 
-        <p>
-          We couldn't find a recently
-          completed order.
-        </p>
+          <div className="container">
 
-        <Link to="/products">
-          Explore Wines
-        </Link>
+            <div className="confirmation-empty-content">
 
-      </section>
+              <span>00</span>
+
+              <p className="section-label">
+                Order
+              </p>
+
+              <h1>
+                No order
+                <span> found.</span>
+              </h1>
+
+              <p>
+                We couldn't find a recently completed
+                order. Explore the collection and find
+                your next bottle.
+              </p>
+
+              <Link
+                to="/products"
+                className="btn btn-primary"
+              >
+                Explore Wines
+                <span>↗</span>
+              </Link>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
     );
   }
 
+
   return (
-    <section className="confirmation-page">
+    <main className="confirmation-page">
 
-      <div className="confirmation-header">
+      {/* ========================================
+          SUCCESS HERO
+      ======================================== */}
 
-        <p>PAYMENT SUCCESSFUL</p>
+      <section className="confirmation-hero">
 
-        <h1>Thank You for Your Order</h1>
+        <div className="container">
 
-        <p>
-          Your payment was successful and
-          your order has been received.
-        </p>
+          <div className="confirmation-status">
 
-      </div>
+            <span className="confirmation-check">
+              ✓
+            </span>
 
-      <div className="confirmation-content">
+            <span>
+              Payment Successful
+            </span>
 
-        <div className="confirmation-details">
+          </div>
 
-          <h2>Order Details</h2>
 
-          <p>
-            <strong>
-              Reference:
-            </strong>{" "}
-            {order.reference}
-          </p>
+          <div className="confirmation-hero-content">
 
-          <p>
-            <strong>
-              Customer:
-            </strong>{" "}
-            {order.customer.firstName}{" "}
-            {order.customer.lastName}
-          </p>
+            <div>
 
-          <p>
-            <strong>
-              Email:
-            </strong>{" "}
-            {order.customer.email}
-          </p>
+              <p className="section-label">
+                Order Confirmed
+              </p>
 
-          <p>
-            <strong>
-              Phone:
-            </strong>{" "}
-            {order.customer.phone}
-          </p>
+              <h1>
+                Thank you for
+                <span> your order.</span>
+              </h1>
 
-          <p>
-            <strong>
-              Delivery Address:
-            </strong>{" "}
-            {order.customer.address},{" "}
-            {order.customer.city},{" "}
-            {order.customer.state}
-          </p>
+            </div>
+
+
+            <div className="confirmation-hero-message">
+
+              <p>
+                Your payment has been verified and
+                your order has been successfully
+                received.
+              </p>
+
+              <span>
+                Reference
+              </span>
+
+              <strong>
+                {order.reference}
+              </strong>
+
+            </div>
+
+          </div>
 
         </div>
 
-        <div className="confirmation-products">
+      </section>
 
-          <h2>Your Order</h2>
 
-          {order.items.map((item) => (
+      {/* ========================================
+          RECEIPT
+      ======================================== */}
 
-            <div
-              key={item.id}
-              className="confirmation-product"
-            >
+      <section className="confirmation-main">
 
-              <img
-                src={item.image}
-                alt={item.name}
-              />
+        <div className="container">
 
-              <div>
-                <h3>{item.name}</h3>
+          <div className="confirmation-layout">
 
-                <p>
-                  Quantity: {item.quantity}
-                </p>
+
+            {/* ====================================
+                ORDER INFORMATION
+            ==================================== */}
+
+            <div className="confirmation-information">
+
+              <div className="confirmation-section-heading">
+
+                <span>01</span>
+
+                <div>
+                  <p className="section-label">
+                    Order Information
+                  </p>
+
+                  <h2>
+                    Your details.
+                  </h2>
+                </div>
+
               </div>
 
+
+              <div className="confirmation-details">
+
+                <div>
+                  <span>
+                    Customer
+                  </span>
+
+                  <strong>
+                    {order.customer.firstName}{" "}
+                    {order.customer.lastName}
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    Email
+                  </span>
+
+                  <strong>
+                    {order.customer.email}
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    Phone
+                  </span>
+
+                  <strong>
+                    {order.customer.phone}
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    Delivery Method
+                  </span>
+
+                  <strong>
+                    {order.shippingMethod === "express"
+                      ? "Express Delivery"
+                      : "Standard Delivery"}
+                  </strong>
+                </div>
+
+
+                <div className="confirmation-address">
+                  <span>
+                    Delivery Address
+                  </span>
+
+                  <strong>
+                    {order.customer.address},{" "}
+                    {order.customer.city},{" "}
+                    {order.customer.state}
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            {/* ====================================
+                RECEIPT SUMMARY
+            ==================================== */}
+
+            <aside className="confirmation-receipt">
+
+              <div className="confirmation-receipt-header">
+
+                <div>
+                  <p className="section-label">
+                    Receipt
+                  </p>
+
+                  <h2>
+                    Your Order
+                  </h2>
+                </div>
+
+                <span>
+                  {order.items.length
+                    .toString()
+                    .padStart(2, "0")}
+                </span>
+
+              </div>
+
+
+              {/* PRODUCTS */}
+
+              <div className="confirmation-products">
+
+                {order.items.map((item) => (
+
+                  <div
+                    key={item.id}
+                    className="confirmation-product"
+                  >
+
+                    <div className="confirmation-product-image">
+
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                      />
+
+                      <span>
+                        {item.quantity}
+                      </span>
+
+                    </div>
+
+
+                    <div className="confirmation-product-info">
+
+                      <span>
+                        {item.category}
+                      </span>
+
+                      <h3>
+                        {item.name}
+                      </h3>
+
+                      <p>
+                        ₦{item.price.toLocaleString()}
+                        {" "}×{" "}
+                        {item.quantity}
+                      </p>
+
+                    </div>
+
+
+                    <strong>
+                      ₦{(
+                        item.price *
+                        item.quantity
+                      ).toLocaleString()}
+                    </strong>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+
+              {/* TOTALS */}
+
+              <div className="confirmation-summary">
+
+                <div>
+                  <span>
+                    Subtotal
+                  </span>
+
+                  <strong>
+                    ₦{order.subtotal.toLocaleString()}
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    Shipping
+                  </span>
+
+                  <strong>
+                    ₦{order.shippingFee.toLocaleString()}
+                  </strong>
+                </div>
+
+              </div>
+
+
+              <div className="confirmation-total">
+
+                <div>
+                  <span>
+                    Total Paid
+                  </span>
+
+                  <small>
+                    NGN
+                  </small>
+                </div>
+
+                <strong>
+                  ₦{order.total.toLocaleString()}
+                </strong>
+
+              </div>
+
+
+              <div className="confirmation-reference">
+
+                <span>
+                  Payment Reference
+                </span>
+
+                <strong>
+                  {order.reference}
+                </strong>
+
+              </div>
+
+            </aside>
+
+          </div>
+
+
+          {/* ========================================
+              NEXT STEP
+          ======================================== */}
+
+          <div className="confirmation-next">
+
+            <div>
+
+              <span>
+                02
+              </span>
+
               <p>
-                ₦{(
-                  item.price *
-                  item.quantity
-                ).toLocaleString()}
+                Order complete
               </p>
 
             </div>
 
-          ))}
 
-        </div>
+            <h2>
+              Now, enjoy the
+              <span> moment.</span>
+            </h2>
 
-        <div className="confirmation-summary">
 
-          <div>
-            <span>Subtotal</span>
+            <p>
+              Your order has been completed successfully.
+              Continue exploring the Waini collection
+              whenever you're ready for another bottle.
+            </p>
 
-            <span>
-              ₦{order.subtotal.toLocaleString()}
-            </span>
-          </div>
 
-          <div>
-            <span>Shipping</span>
+            <Link
+              to="/products"
+              className="btn btn-primary"
+            >
+              Continue Shopping
+              <span>↗</span>
+            </Link>
 
-            <span>
-              ₦{order.shippingFee.toLocaleString()}
-            </span>
-          </div>
-
-          <div>
-            <span>Total</span>
-
-            <strong>
-              ₦{order.total.toLocaleString()}
-            </strong>
           </div>
 
         </div>
 
-      </div>
+      </section>
 
-      <Link
-        to="/products"
-        className="continue-shopping"
-      >
-        Continue Shopping
-      </Link>
-
-    </section>
+    </main>
   );
 }
 

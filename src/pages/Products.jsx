@@ -1,22 +1,35 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import wines from "../data/products";
 import ProductGrid from "../components/product/ProductGrid";
+import "../styles/products.css";
 
 function Products() {
+
   // -----------------------------
-  // Product Filter States
+  // URL + Product Filter States
   // -----------------------------
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState("default");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // Find the most expensive wine automatically
+  const categoryFromUrl =
+    searchParams.get("category") || "All";
+
+  const [selectedCategory, setSelectedCategory] =
+    useState(categoryFromUrl);
+
+  const [searchTerm, setSearchTerm] =
+    useState("");
+
+  const [sortOption, setSortOption] =
+    useState("default");
+
   const highestPrice = Math.max(
     ...wines.map((wine) => wine.price)
   );
 
-  const [maxPrice, setMaxPrice] = useState(highestPrice);
+  const [maxPrice, setMaxPrice] =
+    useState(highestPrice);
 
   // -----------------------------
   // Generate Product Categories
@@ -77,6 +90,18 @@ function Products() {
     );
   }
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+
+    if (category === "All") {
+      setSearchParams({});
+    } else {
+      setSearchParams({
+        category: category,
+      });
+    }
+  };
+
   // -----------------------------
   // Reset Filters
   // -----------------------------
@@ -86,6 +111,7 @@ function Products() {
     setSelectedCategory("All");
     setMaxPrice(highestPrice);
     setSortOption("default");
+    setSearchParams({});
   };
 
   // -----------------------------
@@ -93,157 +119,267 @@ function Products() {
   // -----------------------------
 
   return (
-    <section className="products-page">
+    <main className="products-page">
 
-      {/* Page Heading */}
+      {/* ========================================
+          COLLECTION HERO
+      ======================================== */}
 
-      <div className="products-header">
-        <p>OUR COLLECTION</p>
+      <section className="products-hero">
 
-        <h1>Explore Our Wines</h1>
+        <div className="container">
 
-        <p>
-          Discover our collection of carefully selected wines.
-        </p>
-      </div>
+          <div className="products-hero-inner">
 
-      {/* Product Controls */}
+            <div>
+              <p className="section-label">
+                Our Collection
+              </p>
 
-      <div className="product-controls">
+              <h1>
+                Explore wines for
+                <span> every moment.</span>
+              </h1>
+            </div>
 
-        {/* Search */}
+            <div className="products-hero-description">
 
-        <div className="product-search">
-          <label htmlFor="product-search">
-            Search
-          </label>
+              <p>
+                Discover a curated collection of reds,
+                whites, rosés and sparkling wines selected
+                for different tastes, occasions and budgets.
+              </p>
 
-          <input
-            id="product-search"
-            type="search"
-            placeholder="Search wines..."
-            value={searchTerm}
-            onChange={(event) =>
-              setSearchTerm(event.target.value)
-            }
-          />
-        </div>
+              <span>
+                {wines.length.toString().padStart(2, "0")} wines
+                in the collection
+              </span>
 
-        {/* Categories */}
+            </div>
 
-        <div className="product-filters">
-          {categories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              onClick={() =>
-                setSelectedCategory(category)
-              }
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        {/* Price Filter */}
-
-        <div className="price-filter">
-          <label htmlFor="price">
-            Maximum Price: ₦{maxPrice.toLocaleString()}
-          </label>
-
-          <input
-            id="price"
-            type="range"
-            min="0"
-            max={highestPrice}
-            step="1000"
-            value={maxPrice}
-            onChange={(event) =>
-              setMaxPrice(Number(event.target.value))
-            }
-          />
-        </div>
-
-        {/* Sort */}
-
-        <div className="sort-products">
-          <label htmlFor="sort">
-            Sort by:
-          </label>
-
-          <select
-            id="sort"
-            value={sortOption}
-            onChange={(event) =>
-              setSortOption(event.target.value)
-            }
-          >
-            <option value="default">
-              Default
-            </option>
-
-            <option value="price-low">
-              Price: Low to High
-            </option>
-
-            <option value="price-high">
-              Price: High to Low
-            </option>
-
-            <option value="name">
-              Name: A–Z
-            </option>
-          </select>
-        </div>
-
-        {/* Reset */}
-
-        <button
-          type="button"
-          className="reset-filters"
-          onClick={resetFilters}
-        >
-          Reset Filters
-        </button>
-
-      </div>
-
-      {/* Product Results */}
-
-      <div className="products-results">
-
-        <p className="product-count">
-          {filteredProducts.length}{" "}
-          {filteredProducts.length === 1
-            ? "product"
-            : "products"}{" "}
-          found
-        </p>
-
-        {filteredProducts.length > 0 ? (
-          <ProductGrid products={filteredProducts} />
-        ) : (
-          <div className="no-products">
-            <h3>No wines found</h3>
-
-            <p>
-              Try changing your search, category,
-              or maximum price.
-            </p>
-
-            <button
-              type="button"
-              onClick={resetFilters}
-            >
-              Reset Filters
-            </button>
           </div>
-        )}
 
-      </div>
+        </div>
 
-    </section>
+      </section>
+
+
+      {/* ========================================
+          CATALOGUE
+      ======================================== */}
+
+      <section className="products-catalogue">
+
+        <div className="container">
+
+          {/* SEARCH */}
+
+          <div className="catalogue-search">
+
+            <span className="catalogue-search-icon">
+              ⌕
+            </span>
+
+            <input
+              id="product-search"
+              type="search"
+              placeholder="Search by wine, category or origin..."
+              value={searchTerm}
+              onChange={(event) =>
+                setSearchTerm(event.target.value)
+              }
+            />
+
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
+
+          </div>
+
+
+          {/* CATEGORY NAVIGATION */}
+
+          <div className="catalogue-categories">
+
+            {categories.map((category) => (
+
+              <button
+                key={category}
+                type="button"
+                className={
+                  selectedCategory === category
+                    ? "active"
+                    : ""
+                }
+                onClick={() =>
+                  handleCategoryChange(category)
+                }
+              >
+                {category}
+              </button>
+
+            ))}
+
+          </div>
+
+
+          {/* CATALOGUE TOOLBAR */}
+
+          <div className="catalogue-toolbar">
+
+            <div className="catalogue-results-info">
+
+              <span>
+                {filteredProducts.length
+                  .toString()
+                  .padStart(2, "0")}
+              </span>
+
+              <p>
+                {filteredProducts.length === 1
+                  ? "wine found"
+                  : "wines found"}
+              </p>
+
+            </div>
+
+
+            <div className="catalogue-tools">
+
+              {/* PRICE */}
+
+              <div className="catalogue-price">
+
+                <div className="catalogue-price-label">
+
+                  <span>
+                    Maximum price
+                  </span>
+
+                  <strong>
+                    ₦{maxPrice.toLocaleString()}
+                  </strong>
+
+                </div>
+
+                <input
+                  id="price"
+                  type="range"
+                  min="0"
+                  max={highestPrice}
+                  step="1000"
+                  value={maxPrice}
+                  onChange={(event) =>
+                    setMaxPrice(
+                      Number(event.target.value)
+                    )
+                  }
+                />
+
+              </div>
+
+
+              {/* SORT */}
+
+              <div className="catalogue-sort">
+
+                <label htmlFor="sort">
+                  Sort
+                </label>
+
+                <select
+                  id="sort"
+                  value={sortOption}
+                  onChange={(event) =>
+                    setSortOption(event.target.value)
+                  }
+                >
+                  <option value="default">
+                    Featured
+                  </option>
+
+                  <option value="price-low">
+                    Price: Low to High
+                  </option>
+
+                  <option value="price-high">
+                    Price: High to Low
+                  </option>
+
+                  <option value="name">
+                    Name: A–Z
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <button
+                type="button"
+                className="catalogue-reset"
+                onClick={resetFilters}
+              >
+                Reset
+                <span>↺</span>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          {/* PRODUCTS */}
+
+          <div className="catalogue-products">
+
+            {filteredProducts.length > 0 ? (
+
+              <ProductGrid
+                products={filteredProducts}
+              />
+
+            ) : (
+
+              <div className="no-products">
+
+                <span>00</span>
+
+                <h2>
+                  No wines found.
+                </h2>
+
+                <p>
+                  We couldn't find a wine matching
+                  your current filters. Try adjusting
+                  your search, category or price.
+                </p>
+
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={resetFilters}
+                >
+                  Reset Filters
+                </button>
+
+              </div>
+
+            )}
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
   );
 }
 

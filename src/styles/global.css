@@ -857,7 +857,6 @@ p {
 
   .site-footer {
     margin-top: 60px;
-
     padding-top: 50px;
   }
 
@@ -872,7 +871,6 @@ p {
   .footer-links {
     grid-template-columns:
       1fr 1fr;
-
     gap: 30px;
   }
 

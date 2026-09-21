@@ -308,6 +308,792 @@
   transform: translate(4px, -4px);
 }
 
+/* ========================================
+   HOME — FEATURED WINES
+======================================== */
+
+.featured-wines {
+  border-top: 1px solid var(--color-border);
+}
+
+.featured-heading {
+  display: grid;
+
+  grid-template-columns:
+    1fr 360px;
+
+  align-items: end;
+
+  gap: 80px;
+
+  margin-bottom: 50px;
+}
+
+.featured-heading h2 {
+  margin-top: 14px;
+
+  font-size:
+    clamp(3.2rem, 5vw, 5rem);
+
+  letter-spacing: -0.035em;
+}
+
+.featured-heading h2 span {
+  color: var(--color-gold);
+
+  font-style: italic;
+}
+
+.featured-heading-right > p {
+  color: var(--color-text-muted);
+
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.featured-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  color: var(--color-gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition:
+    color var(--transition);
+}
+
+.featured-view-all span {
+  transition:
+    transform var(--transition);
+}
+
+.featured-view-all:hover {
+  color: var(--color-gold-light);
+}
+
+.featured-view-all:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* FEATURED PRODUCT GRID */
+
+.featured-wines .product-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* ========================================
+   HOME — WAINI ASSISTANT
+======================================== */
+
+.home-assistant {
+  border-top: 1px solid var(--color-border);
+}
+
+.home-assistant-wrapper {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    0.9fr 1.1fr;
+
+  align-items: center;
+
+  gap: 90px;
+
+  padding: 80px;
+
+  overflow: hidden;
+
+  background: var(--color-charcoal);
+
+  border: 1px solid var(--color-border);
+}
+
+
+/* ========================================
+   CONTENT
+======================================== */
+
+.home-assistant-content {
+  position: relative;
+
+  z-index: 2;
+}
+
+.home-assistant-content h2 {
+  max-width: 560px;
+
+  margin-top: 16px;
+
+  font-size:
+    clamp(3.5rem, 5vw, 5.5rem);
+
+  letter-spacing: -0.04em;
+}
+
+.home-assistant-content h2 span {
+  display: block;
+
+  color: var(--color-gold);
+
+  font-style: italic;
+}
+
+.home-assistant-description {
+  max-width: 520px;
+
+  margin-top: 25px;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
+
+/* FEATURES */
+
+.home-assistant-features {
+  max-width: 520px;
+
+  margin: 35px 0;
+}
+
+.home-assistant-features > div {
+  display: grid;
+
+  grid-template-columns:
+    45px 1fr;
+
+  align-items: center;
+
+  min-height: 48px;
+
+  border-top:
+    1px solid var(--color-border);
+}
+
+.home-assistant-features > div:last-child {
+  border-bottom:
+    1px solid var(--color-border);
+}
+
+.home-assistant-features span {
+  color: var(--color-gold);
+
+  font-family: var(--font-heading);
+
+  font-size: 0.8rem;
+}
+
+.home-assistant-features p {
+  color: var(--color-text);
+
+  font-size: 0.78rem;
+}
+
+.home-assistant-content .btn span {
+  margin-left: 5px;
+
+  transition:
+    transform var(--transition);
+}
+
+.home-assistant-content .btn:hover span {
+  transform:
+    translate(3px, -3px);
+}
+
+
+/* ========================================
+   ASSISTANT PREVIEW
+======================================== */
+
+.home-assistant-preview {
+  position: relative;
+
+  z-index: 2;
+}
+
+.assistant-preview-window {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #0d0d0d;
+
+  border:
+    1px solid var(--color-border);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+
+/* HEADER */
+
+.assistant-preview-header {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 0 22px;
+
+  background:
+    rgba(10, 10, 10, 0.95);
+
+  border-bottom:
+    1px solid var(--color-border);
+}
+
+.assistant-preview-identity {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  font-size: 0.75rem;
+}
+
+.assistant-preview-dot {
+  width: 7px;
+  height: 7px;
+
+  background: var(--color-gold);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 4px rgba(198, 161, 91, 0.1);
+}
+
+.assistant-preview-header > span {
+  color: var(--color-text-muted);
+
+  font-size: 0.6rem;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* CHAT */
+
+.assistant-preview-chat {
+  min-height: 430px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 28px;
+
+  padding: 45px 35px;
+
+  background-image:
+    linear-gradient(
+      rgba(198, 161, 91, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(198, 161, 91, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    30px 30px;
+}
+
+
+/* MESSAGES */
+
+.preview-message {
+  max-width: 75%;
+}
+
+.preview-message > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--color-gold);
+
+  font-size: 0.55rem;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.preview-message p {
+  padding: 14px 16px;
+
+  font-size: 0.78rem;
+
+  line-height: 1.7;
+}
+
+.preview-message-user {
+  align-self: flex-end;
+}
+
+.preview-message-user > span {
+  text-align: right;
+}
+
+.preview-message-user p {
+  background: var(--color-gold);
+
+  color: var(--color-black);
+
+  border-radius:
+    12px 2px 12px 12px;
+}
+
+.preview-message-assistant {
+  align-self: flex-start;
+}
+
+.preview-message-assistant p {
+  background:
+    var(--color-charcoal);
+
+  color: var(--color-text);
+
+  border:
+    1px solid var(--color-border);
+
+  border-radius:
+    2px 12px 12px 12px;
+}
+
+
+/* SUGGESTIONS */
+
+.preview-suggestions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.preview-suggestions button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 12px;
+
+  background: transparent;
+
+  color: var(--color-text-muted);
+
+  border:
+    1px solid var(--color-border);
+
+  border-radius: 20px;
+
+  font-size: 0.62rem;
+}
+
+.preview-suggestions button span {
+  color: var(--color-gold);
+}
+
+
+/* INPUT */
+
+.assistant-preview-input {
+  min-height: 72px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 12px 14px 12px 20px;
+
+  background: var(--color-black);
+
+  border-top:
+    1px solid var(--color-border);
+
+  color: var(--color-text-muted);
+
+  font-size: 0.72rem;
+}
+
+.assistant-preview-input div {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background: var(--color-gold);
+
+  color: var(--color-black);
+
+  border-radius: 8px;
+}
+
+
+/* DECORATIVE W */
+
+.home-assistant-mark {
+  position: absolute;
+
+  top: -55px;
+  right: -50px;
+
+  z-index: -1;
+
+  pointer-events: none;
+}
+
+.home-assistant-mark span {
+  color:
+    rgba(198, 161, 91, 0.05);
+
+  font-family:
+    var(--font-heading);
+
+  font-size: 18rem;
+
+  font-style: italic;
+
+  line-height: 1;
+}
+
+/* ========================================
+   HOME — WHY WAINI
+======================================== */
+
+.why-waini {
+  border-top: 1px solid var(--color-border);
+}
+
+.why-waini-heading {
+  display: grid;
+
+  grid-template-columns:
+    1fr 420px;
+
+  align-items: end;
+
+  gap: 80px;
+
+  margin-bottom: 55px;
+}
+
+.why-waini-heading h2 {
+  margin-top: 14px;
+
+  font-size:
+    clamp(3.2rem, 5vw, 5rem);
+
+  letter-spacing: -0.035em;
+}
+
+.why-waini-heading h2 span {
+  display: block;
+
+  color: var(--color-gold);
+
+  font-style: italic;
+}
+
+.why-waini-heading > p {
+  color: var(--color-text-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
+
+/* GRID */
+
+.why-waini-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  border-top:
+    1px solid var(--color-border);
+
+  border-bottom:
+    1px solid var(--color-border);
+}
+
+
+/* CARD */
+
+.why-waini-card {
+  position: relative;
+
+  min-height: 330px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px 28px;
+
+  border-right:
+    1px solid var(--color-border);
+
+  transition:
+    background var(--transition);
+}
+
+.why-waini-card:last-child {
+  border-right: 0;
+}
+
+.why-waini-card:hover {
+  background: var(--color-charcoal);
+}
+
+.why-waini-number {
+  color: var(--color-text-muted);
+
+  font-family: var(--font-heading);
+
+  font-size: 0.75rem;
+}
+
+.why-waini-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 55px;
+
+  color: var(--color-gold);
+
+  border:
+    1px solid var(--color-border);
+
+  border-radius: 50%;
+
+  font-family: var(--font-heading);
+
+  font-size: 1.2rem;
+
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    color var(--transition);
+}
+
+.why-waini-card:hover
+.why-waini-icon {
+  background: var(--color-gold);
+
+  color: var(--color-black);
+
+  border-color: var(--color-gold);
+}
+
+.why-waini-card h3 {
+  margin-top: auto;
+
+  padding-top: 45px;
+
+  font-size: 1.55rem;
+}
+
+.why-waini-card p {
+  margin-top: 12px;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.78rem;
+  line-height: 1.8;
+}
+
+/* ========================================
+   HOME — FINAL CTA
+======================================== */
+
+.home-final-cta {
+  padding: 40px 0 100px;
+}
+
+.final-cta-wrapper {
+  position: relative;
+
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 80px 40px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #171717 0%,
+      #0c0c0c 100%
+    );
+
+  border:
+    1px solid var(--color-border);
+
+  text-align: center;
+}
+
+
+/* DECORATIVE MARK */
+
+.final-cta-mark {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  color:
+    rgba(198, 161, 91, 0.035);
+
+  font-family:
+    var(--font-heading);
+
+  font-size:
+    clamp(22rem, 45vw, 42rem);
+
+  font-style: italic;
+
+  line-height: 0.7;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%);
+}
+
+
+/* CONTENT */
+
+.final-cta-content {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 850px;
+}
+
+.final-cta-content h2 {
+  margin-top: 18px;
+
+  font-size:
+    clamp(4rem, 7vw, 7rem);
+
+  letter-spacing: -0.045em;
+
+  line-height: 0.95;
+}
+
+.final-cta-content h2 span {
+  color: var(--color-gold);
+
+  font-style: italic;
+}
+
+.final-cta-content > p {
+  max-width: 580px;
+
+  margin:
+    28px auto 0;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
+
+/* ACTIONS */
+
+.final-cta-actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-top: 35px;
+}
+
+.final-cta-actions .btn span {
+  transition:
+    transform var(--transition);
+}
+
+.final-cta-actions
+.btn:hover span {
+  transform:
+    translate(3px, -3px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -374,8 +1160,129 @@
     font-size: 1.7rem;
   }
 
+  /* FEATURED WINES */
+  .featured-heading {
+    grid-template-columns: 1fr 300px;
+
+    gap: 45px;
+  }
+
+  .featured-wines .product-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 35px 20px;
+  }
+
+
+  /* HOME — ASSISTANT */
+
+  .home-assistant-wrapper {
+    grid-template-columns:
+      0.9fr 1.1fr;
+
+    gap: 45px;
+
+    padding: 55px 45px;
+  }
+
+  .home-assistant-content h2 {
+    font-size:
+      clamp(3.2rem, 6vw, 4.5rem);
+  }
+
+  .assistant-preview-chat {
+    min-height: 390px;
+
+    padding: 35px 25px;
+  }
+
+  .preview-message {
+    max-width: 85%;
+  }
+
+  /* WHY WAINI */
+
+  .why-waini-heading {
+    grid-template-columns:
+      1fr 340px;
+
+    gap: 45px;
+  }
+
+  .why-waini-heading h2 {
+    font-size:
+      clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .why-waini-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .why-waini-card {
+    min-height: 300px;
+  }
+
+  .why-waini-card:nth-child(2) {
+    border-right: 0;
+  }
+
+  .why-waini-card:nth-child(-n + 2) {
+    border-bottom:
+      1px solid var(--color-border);
+  }
+
+
+  /* FINAL CTA */
+
+  .final-cta-wrapper {
+    min-height: 480px;
+
+    padding: 70px 40px;
+  }
+
+  .final-cta-content h2 {
+    font-size:
+      clamp(4rem, 8vw, 6rem);
+  }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ========================================
@@ -432,21 +1339,21 @@
 
   /* HOME — CATEGORIES */
 
-    .categories-heading {
+  .categories-heading {
     grid-template-columns: 1fr;
     gap: 25px;
     margin-bottom: 40px;
-    }
+  }
 
-    .categories-heading h2 {
+  .categories-heading h2 {
     font-size: clamp(3rem, 10vw, 4.5rem);
-    }
+  }
 
-    .categories-intro {
+  .categories-intro {
     max-width: 560px;
-    }
+  }
 
-    .categories-grid {
+ .categories-grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
     grid-template-rows: none;
@@ -476,27 +1383,199 @@
     height: 360px;
   }
 
-    .category-content {
+  .category-content {
     right: 20px;
     bottom: 20px;
     left: 20px;
-
     grid-template-columns:
         1fr auto;
-    }
+  }
 
-    .category-number {
+    
+  .category-number {
     position: absolute;
-
     bottom: 55px;
     left: 0;
-    }
+  }
 
-    .category-content h3 {
+  .category-content h3 {
     font-size: 1.7rem;
-    }
+  }
+
+
+  /* FEATURED WINES */
+
+  .featured-heading {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+
+    margin-bottom: 40px;
+  }
+
+  .featured-heading h2 {
+    font-size:
+      clamp(3rem, 10vw, 4.5rem);
+  }
+
+  .featured-heading-right {
+    max-width: 500px;
+  }
+
+  .featured-wines .product-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 35px 16px;
+  }
+
+
+  /* HOME — ASSISTANT */
+
+  .home-assistant-wrapper {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+
+    padding: 50px 35px;
+  }
+
+  .home-assistant-content {
+    max-width: 600px;
+  }
+
+  .home-assistant-content h2 {
+    font-size:
+      clamp(3rem, 10vw, 4.5rem);
+  }
+
+  .home-assistant-description {
+    max-width: 560px;
+  }
+
+  .home-assistant-features {
+    max-width: 560px;
+  }
+
+  .home-assistant-preview {
+    width: 100%;
+  }
+
+  .assistant-preview-chat {
+    min-height: 400px;
+  }
+
+  .preview-message {
+    max-width: 75%;
+  }
+
+  /* WHY WAINI */
+
+  .why-waini-heading {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+
+    margin-bottom: 40px;
+  }
+
+  .why-waini-heading h2 {
+    font-size:
+      clamp(3rem, 10vw, 4.5rem);
+  }
+
+  .why-waini-heading > p {
+    max-width: 560px;
+  }
+
+  .why-waini-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .why-waini-card {
+    min-height: 290px;
+
+    padding: 25px 22px;
+  }
+
+  .why-waini-icon {
+    margin-top: 40px;
+  }
+
+
+  /* FINAL CTA */
+
+  .home-final-cta {
+    padding:
+      20px 0 80px;
+  }
+
+  .final-cta-wrapper {
+    min-height: 500px;
+
+    padding: 65px 30px;
+  }
+
+  .final-cta-content h2 {
+    font-size:
+      clamp(3.5rem, 11vw, 5.5rem);
+  }
+
+  .final-cta-content > p {
+    max-width: 520px;
+  }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -614,5 +1693,161 @@
     font-size: 0.6rem;
     }
 
+  /* FEATURED WINES */
+
+  .featured-heading {
+    margin-bottom: 32px;
+  }
+
+  .featured-heading h2 {
+    font-size:
+      clamp(2.8rem, 13vw, 3.8rem);
+  }
+
+  .featured-wines .product-grid {
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+  }
+
+  /* HOME — ASSISTANT */
+
+  .home-assistant-wrapper {
+    gap: 45px;
+    padding: 38px 20px;
+  }
+
+  .home-assistant-content h2 {
+    font-size: clamp(2.8rem, 13vw, 3.8rem);
+  }
+
+  .home-assistant-description {
+    font-size: 0.85rem;
+  }
+
+  .home-assistant-features {
+    margin: 28px 0;
+  }
+
+  .assistant-preview-header {
+    padding: 0 16px;
+  }
+
+  .assistant-preview-header > span {
+    display: none;
+  }
+
+  .assistant-preview-chat {
+    min-height: 390px;
+    padding: 30px 16px;
+    gap: 24px;
+  }
+
+  .preview-message {
+    max-width: 90%;
+  }
+
+  .preview-message p {
+    padding: 12px 14px;
+    font-size: 0.72rem;
+  }
+
+  .preview-suggestions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .assistant-preview-input {
+    min-height: 65px;
+    padding: 10px 10px 10px 15px;
+  }
+
+  .assistant-preview-input div {
+    width: 40px;
+    height: 40px;
+  }
+
+  .home-assistant-mark {
+    display: none;
+  }
+
+  /* WHY WAINI */
+
+  .why-waini-heading {
+    margin-bottom: 32px;
+  }
+
+  .why-waini-heading h2 {
+    font-size:
+      clamp(2.8rem, 13vw, 3.8rem);
+  }
+
+  .why-waini-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-waini-card {
+    min-height: 270px;
+
+    border-right: 0;
+
+    border-bottom:
+      1px solid var(--color-border);
+  }
+
+  .why-waini-card:last-child {
+    border-bottom: 0;
+  }
+
+  .why-waini-card:nth-child(2) {
+    border-right: 0;
+  }
+
+  .why-waini-icon {
+    margin-top: 35px;
+  }
+
+
+  /* FINAL CTA */
+
+  .home-final-cta {
+    padding:
+      10px 0 60px;
+  }
+
+  .final-cta-wrapper {
+    min-height: 500px;
+
+    padding: 55px 20px;
+  }
+
+  .final-cta-content h2 {
+    font-size:
+      clamp(3.2rem, 14vw, 4.5rem);
+  }
+
+  .final-cta-content > p {
+    margin-top: 22px;
+
+    font-size: 0.85rem;
+  }
+
+  .final-cta-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+
+    margin-top: 30px;
+  }
+
+  .final-cta-actions .btn {
+    width: 100%;
+  }
+
+  .final-cta-mark {
+    font-size: 24rem;
+  }
 
 }

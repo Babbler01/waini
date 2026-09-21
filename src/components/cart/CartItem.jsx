@@ -11,7 +11,12 @@ function CartItem({ item }) {
   return (
     <article className="cart-item">
 
-      <Link to={`/products/${item.id}`}>
+      {/* IMAGE */}
+
+      <Link
+        to={`/products/${item.id}`}
+        className="cart-item-image-wrapper"
+      >
         <img
           src={item.image}
           alt={item.name}
@@ -19,47 +24,84 @@ function CartItem({ item }) {
         />
       </Link>
 
+
+      {/* PRODUCT INFORMATION */}
+
       <div className="cart-item-details">
-        <p>{item.category}</p>
+
+        <p className="cart-item-category">
+          {item.category}
+        </p>
 
         <Link to={`/products/${item.id}`}>
           <h3>{item.name}</h3>
         </Link>
 
-        <p>
+        <p className="cart-item-price">
           ₦{item.price.toLocaleString()}
+          <span> / bottle</span>
         </p>
+
       </div>
 
-      <div className="cart-item-quantity">
-        <button
-          type="button"
-          onClick={() =>
-            decreaseQuantity(item.id)
-          }
-        >
-          −
-        </button>
 
-        <span>{item.quantity}</span>
+      {/* QUANTITY */}
 
-        <button
-          type="button"
-          onClick={() =>
-            increaseQuantity(item.id)
-          }
-        >
-          +
-        </button>
+      <div className="cart-item-quantity-wrapper">
+
+        <span className="cart-item-label">
+          Quantity
+        </span>
+
+        <div className="cart-item-quantity">
+
+          <button
+            type="button"
+            onClick={() =>
+              decreaseQuantity(item.id)
+            }
+            aria-label={`Decrease quantity of ${item.name}`}
+          >
+            −
+          </button>
+
+          <span>
+            {item.quantity}
+          </span>
+
+          <button
+            type="button"
+            onClick={() =>
+              increaseQuantity(item.id)
+            }
+            aria-label={`Increase quantity of ${item.name}`}
+          >
+            +
+          </button>
+
+        </div>
+
       </div>
+
+
+      {/* TOTAL */}
 
       <div className="cart-item-total">
+
+        <span className="cart-item-label">
+          Total
+        </span>
+
         <p>
           ₦{(
             item.price * item.quantity
           ).toLocaleString()}
         </p>
+
       </div>
+
+
+      {/* REMOVE */}
 
       <button
         type="button"
@@ -67,8 +109,10 @@ function CartItem({ item }) {
         onClick={() =>
           removeFromCart(item.id)
         }
+        aria-label={`Remove ${item.name} from cart`}
       >
-        Remove
+        <span>Remove</span>
+        <span>×</span>
       </button>
 
     </article>

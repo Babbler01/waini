@@ -1,31 +1,48 @@
 import { Link } from "react-router-dom";
+import "../../styles/product.css";
 
 function ProductCard({ wine }) {
   return (
-    <Link
-      to={`/products/${wine.id}`}
-      className="product-card-link"
-    >
-      <article className="product-card">
+    <article className="product-card">
+
+      <Link
+        to={`/products/${wine.id}`}
+        className="product-card-image"
+      >
         <img
           src={wine.image}
           alt={wine.name}
-          className="product-image"
         />
 
-        <div className="product-info">
-          <p className="product-category">
-            {wine.category}
-          </p>
+        <span className="product-view-label">
+          View Wine ↗
+        </span>
+      </Link>
 
+      <div className="product-card-content">
+
+        <div className="product-card-meta">
+          <span>{wine.category}</span>
+          <span>{wine.origin}</span>
+        </div>
+
+        <Link to={`/products/${wine.id}`}>
           <h3>{wine.name}</h3>
+        </Link>
 
-          <p className="product-price">
+        <div className="product-card-footer">
+          <p className="product-card-price">
             ₦{wine.price.toLocaleString()}
           </p>
+
+          <span className="product-card-volume">
+            {wine.volume}
+          </span>
         </div>
-      </article>
-    </Link>
+
+      </div>
+
+    </article>
   );
 }
 

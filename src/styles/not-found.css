@@ -1,0 +1,426 @@
+/* ========================================
+   404 PAGE
+======================================== */
+
+.not-found-page {
+  position: relative;
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 90px 0;
+  background: var(--color-black);
+}
+
+
+/* ========================================
+   CONTENT
+======================================== */
+
+.not-found-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+/* ========================================
+   404 NUMBER
+======================================== */
+
+.not-found-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 35px;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(5rem, 10vw, 8rem);
+  font-weight: 500;
+  line-height: 0.8;
+}
+
+.not-found-zero {
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: clamp(5rem, 10vw, 8rem);
+}
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.not-found-content h1 {
+  max-width: 800px;
+
+  margin-top: 18px;
+
+  font-size:
+    clamp(4rem, 7vw, 6.5rem);
+
+  line-height: 0.9;
+
+  letter-spacing: -0.05em;
+}
+
+.not-found-content h1 span {
+  display: block;
+
+  color: var(--color-gold);
+
+  font-style: italic;
+}
+
+
+/* DESCRIPTION */
+
+.not-found-description {
+  max-width: 500px;
+
+  margin-top: 25px;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.82rem;
+
+  line-height: 1.9;
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.not-found-actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 35px;
+}
+
+.not-found-actions .btn {
+  min-width: 160px;
+}
+
+
+/* ========================================
+   ASSISTANT LINK
+======================================== */
+
+.not-found-assistant {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 55px;
+
+  padding-top: 25px;
+
+  border-top:
+    1px solid var(--color-border);
+}
+
+.not-found-assistant > span {
+  color: var(--color-text-muted);
+
+  font-size: 0.62rem;
+}
+
+.not-found-assistant a {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--color-text);
+
+  font-size: 0.62rem;
+  font-weight: 600;
+
+  transition:
+    color var(--transition);
+}
+
+.not-found-assistant a > span {
+  color: var(--color-gold);
+
+  transition:
+    transform var(--transition);
+}
+
+.not-found-assistant a:hover {
+  color: var(--color-gold);
+}
+
+.not-found-assistant a:hover > span {
+  transform:
+    translate(3px, -3px);
+}
+
+
+/* ========================================
+   DECORATIVE BACKGROUND
+======================================== */
+
+.not-found-background {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  color: transparent;
+
+  font-family: var(--font-heading);
+
+  font-size:
+    clamp(30rem, 60vw, 65rem);
+
+  font-weight: 500;
+
+  line-height: 0.7;
+
+  -webkit-text-stroke:
+    1px rgba(198, 161, 91, 0.05);
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1024px) {
+
+  .not-found-page {
+    padding:
+      80px 0;
+  }
+
+  .not-found-content {
+    max-width: 700px;
+  }
+
+  .not-found-content h1 {
+    font-size:
+      clamp(4rem, 9vw, 5.8rem);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+
+  .not-found-page {
+    min-height:
+      calc(100vh - var(--header-height));
+
+    padding:
+      70px 0;
+  }
+
+  .not-found-number {
+    gap: 10px;
+
+    margin-bottom: 30px;
+
+    font-size:
+      clamp(4.5rem, 18vw, 6rem);
+  }
+
+  .not-found-zero {
+    width:
+      clamp(65px, 17vw, 90px);
+
+    height:
+      clamp(65px, 17vw, 90px);
+  }
+
+  .not-found-content h1 {
+    font-size:
+      clamp(3.7rem, 13vw, 5rem);
+  }
+
+  .not-found-description {
+    max-width: 440px;
+  }
+
+  .not-found-background {
+    font-size:
+      clamp(25rem, 100vw, 40rem);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+
+  .not-found-page {
+    padding:
+      60px 0;
+  }
+
+  .not-found-number {
+    font-size:
+      clamp(4rem, 20vw, 5rem);
+  }
+
+  .not-found-content h1 {
+    font-size:
+      clamp(3.2rem, 15vw, 4.3rem);
+  }
+
+  .not-found-description {
+    font-size: 0.76rem;
+  }
+
+
+  /* ACTIONS */
+
+  .not-found-actions {
+    flex-direction: column;
+
+    width: 100%;
+
+    max-width: 280px;
+  }
+
+  .not-found-actions .btn {
+    width: 100%;
+  }
+
+
+  /* ASSISTANT */
+
+  .not-found-assistant {
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 45px;
+  }
+
+}
